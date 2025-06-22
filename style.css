@@ -1,11 +1,4 @@
-/**
- * Theme Name: Astra Child
- * Template:   astra
- * Text Domain: astra-child
- * ...other header fields
- */
-
- /* General & Dashboard */
+/* General & Dashboard */
 *{
   font-family: 'Red Hat Display', sans-serif !important;
 }
@@ -30,7 +23,7 @@ body {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 #jahbulonn-dashboard .sidebar a:hover {
-    background-color: #0792e3;
+    background-color: #019EBE;
     color: white;
 }
 #jahbulonn-dashboard .offcanvas-end {
@@ -206,7 +199,7 @@ img.jahbulonn-logo {
 
   .jahbulonn-pdf-list a {
     text-decoration: none;
-    color: #0792e3;
+    color: #019EBE;
   }
 
   .jahbulonn-pdf-list a:hover {
@@ -232,7 +225,7 @@ img.jahbulonn-logo {
 
   .jahbulonn-profile-header {
     padding: 25px 30px;
-    background: #0792e3;
+    background: #5c291c;
     color: white;
     text-align: center;
     font-weight: 700;
@@ -257,7 +250,7 @@ img.jahbulonn-logo {
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    border: 4px solid #0792e3;
+    border: 4px solid #019EBE;
     object-fit: cover;
     box-shadow: 0 0 15px rgba(147, 76, 176, 0.3);
   }
@@ -278,7 +271,7 @@ img.jahbulonn-logo {
     display: block;
     margin-bottom: 10px;
     font-weight: 600;
-    color: #0792e3;
+    color: #019EBE;
   }
 
   .jahbulonn-profile-input {
@@ -292,7 +285,7 @@ img.jahbulonn-logo {
   }
 
   .jahbulonn-profile-input:focus {
-    border-color: #0792e3;
+    border-color: #019EBE;
     outline: none;
     box-shadow: 0 0 6px rgba(147, 76, 176, 0.5);
   }
@@ -309,7 +302,7 @@ img.jahbulonn-logo {
   }
 
   .jahbulonn-profile-button {
-    background-color: #0792e3;
+    background-color: #019EBE;
     color: white;
     border: none;
     padding: 12px 22px;
@@ -322,7 +315,7 @@ img.jahbulonn-logo {
   }
 
   .jahbulonn-profile-button:hover {
-    background-color: #0792e3;
+    background-color: #019EBE;
     box-shadow: 0 5px 15px rgba(122, 59, 163, 0.6);
   }
 
@@ -347,6 +340,6 @@ img.jahbulonn-logo {
  }
 
  #jahbulonn-dashboard .jahbulonn-menu-item.active {
-    background-color: #e30707 !important;
-    color: #ffffff !important;
+    background-color: #fc1100 !important;
+    color: rgb(0, 0, 0) !important;
  }

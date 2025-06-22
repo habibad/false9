@@ -55,7 +55,7 @@ if ( isset( $_POST['forgot_password'] ) ) {
         <!-- Forgot form -->
         <form class="forgot-form" method="post">
           <div class="imgcontainer">
-              <img style="width:300px; height: 200px;" src="<?php echo get_theme_file_uri(); ?>/assets/images/logo.png" alt="logo" class="avatar">
+              <img style="width:300px; height: 100px;" src="<?php echo get_theme_file_uri(); ?>/user-dashboard/false-icon.png" alt="logo" class="avatar">
           </div>
           <div class="input-control">
             <p>Enter your email, we will send a link to reset your password.</p>

@@ -72,7 +72,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 <form class="signup-form" method="post">
                     <?php wp_nonce_field('user_registration'); ?>
                     <div class="imgcontainer">
-                        <img src="<?php echo get_theme_file_uri(); ?>/user-dashboard/false-icon.png" alt="logo"
+                        <img style="width:300px; height: 100px;" src="<?php echo get_theme_file_uri(); ?>/user-dashboard/false-icon.png" alt="logo"
                             class="img-fluid avatar">
                     </div>
                     <div class="input-control">

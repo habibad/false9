@@ -225,7 +225,7 @@ img.jahbulonn-logo {
 
   .jahbulonn-profile-header {
     padding: 25px 30px;
-    background: #019EBE;
+    background: #5c291c;
     color: white;
     text-align: center;
     font-weight: 700;
@@ -340,6 +340,6 @@ img.jahbulonn-logo {
  }
 
  #jahbulonn-dashboard .jahbulonn-menu-item.active {
-    background-color: #019EBE !important;
-    color: rgb(243, 1, 1) !important;
+    background-color: #fc1100 !important;
+    color: rgb(0, 0, 0) !important;
  }
