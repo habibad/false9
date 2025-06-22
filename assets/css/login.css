@@ -139,9 +139,9 @@ h6 {
 }
 .login-page .login-form p,
 .login-page .signup-form p,
-.login-page .forgot-form p {
+.login-page .forgot-form p a{
   text-align: center;
-  color: #868686;
+  color: #ffffff;
 }
 .login-page .login-form .imgcontainer,
 .login-page .signup-form .imgcontainer,
@@ -383,8 +383,8 @@ h6 {
 .login-page .signup-form .input-control .login-btns button:hover,
 .login-page .forgot-form .input-control .login-btns button:hover {
   background-color: transparent;
-  color: #0792e3;
-  border: 2px solid #0792e3;
+  color: #ffffff;
+  border: 2px solid #FF0F50;
 }
 .login-page .login-form .input-control .division-lines,
 .login-page .signup-form .input-control .division-lines,
@@ -535,7 +535,7 @@ h6 {
 .login-page .signup-form .input-control .login-with-btns .already-acc a,
 .login-page .forgot-form .input-control .login-with-btns .already-acc a {
   padding: 0 5px;
-  color: #0792e3;
+  color: #ffffff;
   background-color: transparent;
   text-decoration: none;
   font-weight: 600;
@@ -545,7 +545,7 @@ h6 {
 .login-page .login-form .input-control .login-with-btns .already-acc a:hover,
 .login-page .signup-form .input-control .login-with-btns .already-acc a:hover,
 .login-page .forgot-form .input-control .login-with-btns .already-acc a:hover {
-  color: #444;
+  color: #FF0F50;
 }
 
 @media screen and (max-width: 767px) {

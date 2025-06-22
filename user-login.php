@@ -60,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login'])) {
                         <div class="login-btns">
                             <button type="submit" name="login">Login</button>
                         </div>
-                        <p><a href="<?php echo esc_url(get_permalink(get_page_by_path('Forgot Password'))); ?> ">Forgot Password?</a></p>
+                        <p><a style="color: #fff; text-align: right;" href="<?php echo esc_url(get_permalink(get_page_by_path('Forgot Password'))); ?> ">Forgot Password?</a></p>
                         <div class="login-with-btns">
                             <span class="already-acc">Not a member? <a href="<?php echo esc_url(get_permalink(get_page_by_path('User Registration'))); ?>" class="signup-btn">Sign up</a></span>
                         </div>

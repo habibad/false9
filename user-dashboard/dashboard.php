@@ -90,3 +90,9 @@ include "header-user-dashboard.php";
     <?php require "dashboard-offcanvas.php"; ?>
 </main>
 <?php include "footer-user-dashboard.php"; ?>
+
+<style>
+     #jahbulonn-dashboard{
+         background-color:rgb(26, 26, 26);
+     }
+</style>
