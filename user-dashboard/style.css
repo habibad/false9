@@ -1,0 +1,345 @@
+/* General & Dashboard */
+*{
+  font-family: 'Red Hat Display', sans-serif !important;
+}
+body {
+    overflow-x: hidden;
+}
+#jahbulonn-dashboard .sidebar {
+    min-height: 1300px;
+    background-color: white;
+    color: black;
+    border-right: 1px solid #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+#jahbulonn-dashboard .sidebar a {
+    color: black;
+    text-decoration: none;
+    display: block;
+    padding: 10px 20px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+#jahbulonn-dashboard .sidebar a:hover {
+    background-color: #019EBE;
+    color: white;
+}
+#jahbulonn-dashboard .offcanvas-end {
+    width: 250px;
+}
+#jahbulonn-dashboard .jahbulonn-profile-picture {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+}
+#jahbulonn-dashboard .offcanvas-header {
+    background-color: #fff;
+}
+table .jahbulonn-user-photo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+img.jahbulonn-logo {
+    width: 250px;
+    height: 100px;
+    object-fit: contain;
+}
+@media (max-width: 767px) {
+    #jahbulonn-dashboard .menu-items .jahbulonn-logo {
+        display: none;
+    }
+}
+
+/* My Application */
+
+.jahbulonn-application-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    overflow-x: auto;
+}
+
+.jahbulonn-application-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    background-color: #fff;
+}
+
+.jahbulonn-application-title {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.jahbulonn-application-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.jahbulonn-action-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #666;
+}
+
+.jahbulonn-application-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.jahbulonn-application-table th {
+    text-align: left;
+    padding: 15px 20px;
+    background-color: #f9f9f9;
+    border-bottom: 1px solid #e0e0e0;
+    font-weight: 600;
+    color: #333;
+}
+
+.jahbulonn-application-table td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    vertical-align: top;
+}
+
+.jahbulonn-application-table tr:last-child td {
+    border-bottom: none;
+}
+
+.jahbulonn-application-table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.jahbulonn-row-number {
+    color: #666;
+    font-weight: normal;
+}
+
+.jahbulonn-download-link {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+.jahbulonn-download-link:hover {
+    text-decoration: underline;
+}
+
+
+
+/* Study Materials */
+.jahbulonn-study-materials-container {
+    max-width: 800px;
+    background: #fff;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
+  }
+
+  .jahbulonn-study-materials-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  .jahbulonn-upload-section {
+    border: 2px dashed #aaa;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    background: #f0f0f0;
+  }
+
+  .jahbulonn-upload-section input[type="file"] {
+    margin-bottom: 10px;
+  }
+
+  .jahbulonn-upload-section button {
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .jahbulonn-upload-section button:hover {
+    background: #218838;
+  }
+
+  .jahbulonn-pdf-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .jahbulonn-pdf-list li {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 20px;
+    margin-bottom: 10px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+  }
+
+  .jahbulonn-pdf-list li span {
+    font-weight: 500;
+  }
+
+  .jahbulonn-pdf-list a {
+    text-decoration: none;
+    color: #019EBE;
+  }
+
+  .jahbulonn-pdf-list a:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 767px) {
+    .jahbulonn-study-materials-container {
+        padding: 10px;
+    }
+  }
+
+  /* Profile */
+  .jahbulonn-profile-container {
+    max-width: 80%;
+    margin: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(147, 76, 176, 0.15);
+    overflow: hidden;
+    padding-bottom: 30px;
+  }
+
+  .jahbulonn-profile-header {
+    padding: 25px 30px;
+    background: #019EBE;
+    color: white;
+    text-align: center;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 1.1px;
+  }
+  .jahbulonn-profile-header h1 {
+    color: white;
+  }
+
+  .jahbulonn-profile-content {
+    padding: 30px 40px 20px 40px;
+  }
+
+  .jahbulonn-profile-picture-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+  }
+
+  .jahbulonn-profile-picture {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid #019EBE;
+    object-fit: cover;
+    box-shadow: 0 0 15px rgba(147, 76, 176, 0.3);
+  }
+
+  .jahbulonn-profile-info {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: #4a4a4a;
+    text-align: center;
+  }
+
+  .jahbulonn-profile-form {
+    margin-top: 25px;
+  }
+
+  .jahbulonn-profile-label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #019EBE;
+  }
+
+  .jahbulonn-profile-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.8px solid #c9bde0;
+    border-radius: 8px;
+    font-size: 15px;
+    color: #4a4a4a;
+    transition: border-color 0.3s ease;
+  }
+
+  .jahbulonn-profile-input:focus {
+    border-color: #019EBE;
+    outline: none;
+    box-shadow: 0 0 6px rgba(147, 76, 176, 0.5);
+  }
+
+  .jahbulonn-profile-form-row {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+
+  .jahbulonn-profile-form-input {
+    flex-grow: 1;
+  }
+
+  .jahbulonn-profile-button {
+    background-color: #019EBE;
+    color: white;
+    border: none;
+    padding: 12px 22px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 3px 8px rgba(147, 76, 176, 0.4);
+  }
+
+  .jahbulonn-profile-button:hover {
+    background-color: #019EBE;
+    box-shadow: 0 5px 15px rgba(122, 59, 163, 0.6);
+  }
+
+  .jahbulonn-profile-message {
+    margin-top: 15px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .jahbulonn-error-message {
+    color: #d9534f;
+  }
+
+  .jahbulonn-success-message {
+    color: #28a745;
+  }
+
+ @media (max-width: 767px) {
+    .jahbulonn-profile-container{
+        max-width: 100%;
+    }
+ }
+
+ #jahbulonn-dashboard .jahbulonn-menu-item.active {
+    background-color: #019EBE !important;
+    color: rgb(243, 1, 1) !important;
+ }
