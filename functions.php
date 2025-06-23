@@ -49,46 +49,63 @@ add_action('wp_enqueue_scripts', 'child_enqueue_files');
 // Safe manual trigger using admin_init
 
 
-function jahbulonn_create_ai_tips_table() {
-    global $wpdb;
+add_action('wp_ajax_load_ai_tips', 'load_ai_tips_callback');
+add_action('wp_ajax_nopriv_load_ai_tips', 'load_ai_tips_callback');
+
+function load_ai_tips_callback() {
+    global $wpdb, $current_user;
+    wp_get_current_user();
+
     $table_name = $wpdb->prefix . 'ai_tips';
+    $date = sanitize_text_field($_POST['date']);
+    $membership_levels = array('free', 'standard', 'premium');
+    $user_level = 'free';
 
-    // Check if the table already exists
-    if ($wpdb->get_var("SHOW TABLES LIKE '$table_name'") !== $table_name) {
-        require_once ABSPATH . 'wp-admin/includes/upgrade.php';
-        $charset_collate = $wpdb->get_charset_collate();
+    foreach ($membership_levels as $level) {
+        if (current_user_can($level)) {
+            $user_level = $level;
+        }
+    }
 
-        $sql = "CREATE TABLE $table_name (
-            id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-            match VARCHAR(255) NOT NULL,
-            date DATETIME NOT NULL,
-            tip_type VARCHAR(100) NOT NULL,
-            odds FLOAT NOT NULL,
-            stake FLOAT NOT NULL,
-            result VARCHAR(50),
-            return_amt FLOAT,
-            profit FLOAT,
-            tip_result VARCHAR(20),
-            month VARCHAR(20),
-            created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-            PRIMARY KEY (id)
-        ) $charset_collate;";
+    $tips = $wpdb->get_results(
+        $wpdb->prepare(
+            "SELECT * FROM $table_name 
+             WHERE DATE(date) = %s 
+             AND FIND_IN_SET(%s, membership)
+             ORDER BY id DESC",
+            $date,
+            $user_level
+        )
+    );
 
-        dbDelta($sql);
-        error_log('✅ ai_tips table created successfully!');
+    if ($tips) {
+        foreach ($tips as $tip) {
+            $flag = "🇳🇱"; // Static for now; optional to make dynamic later
+            echo '
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-warning text-dark font-weight-bold text-center">
+                        ' . strtoupper($user_level) . ' TIP
+                    </div>
+                    <div class="card-body text-center">
+                        <h5 class="card-title">'. esc_html($tip->match) .'</h5>
+                        <p class="mb-1 text-muted">'. $flag .' '. date("jS F Y · H:i", strtotime($tip->date)) .'</p>
+                        <p class="mb-2"><strong>AI Tip:</strong> '. esc_html($tip->tip_type) .'</p>
+                        <div class="d-flex justify-content-center gap-3">
+                            <span class="badge bg-dark text-white fs-6">💰 '. esc_html($tip->odds) .'</span>
+                            <span class="badge bg-success text-white fs-6">Stake: $'. esc_html($tip->stake) .'</span>
+                        </div>
+                    </div>
+                </div>
+            </div>';
+        }
     } else {
-        error_log('ℹ️ ai_tips table already exists.');
+        echo '<div class="col-12 text-muted text-center">No tips found for this date.</div>';
     }
+
+    wp_die();
 }
 
-add_action('admin_init', 'jahbulonn_create_ai_tips_table_once');
-
-function jahbulonn_create_ai_tips_table_once() {
-    // Only for admin user and local testing
-    if (current_user_can('administrator') && isset($_GET['create_ai_tips']) && $_GET['create_ai_tips'] === 'yes') {
-        jahbulonn_create_ai_tips_table();
-    }
-}
 
 
 
