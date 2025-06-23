@@ -1,4 +1,4 @@
-<div class="menu-items">
+<div class="menu-items ">
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/user-dashboard/false-icon.png" alt="logo"
         class="rounded jahbulonn-logo">
 
@@ -26,12 +26,26 @@
      <!-- anik applying start from here 
      the code works for the tips in the admin and menu dashboard -->
 <?php if ( current_user_can('administrator') ) : ?>
-    <?php if ( is_page('tips') ) : ?>
+    <?php if ( is_page('statistics') ) : ?>
         <a href="<?php echo home_url(); ?>/statistics" class="jahbulonn-menu-item active">statistics</a>
     <?php else: ?>
         <a href="<?php echo home_url(); ?>/statistics" class="jahbulonn-menu-item">statistics</a>
     <?php endif; ?>
 <?php endif; ?>
+<!-- anik applying ending here 
+     the code works for the tips in the admin and menu dashboard -->
+
+
+     <!-- anik applying start from here 
+     the code works for the tips in the admin and menu dashboard -->
+<?php if ( is_user_logged_in() ) : ?>
+    <?php if ( is_page('ai-tips-viewer') ) : ?>
+        <a href="<?php echo home_url(); ?>/ai-tips-viewer" class="jahbulonn-menu-item active">AI Tips Viewer</a>
+    <?php else: ?>
+        <a href="<?php echo home_url(); ?>/ai-tips-viewer" class="jahbulonn-menu-item">AI Tips Viewer</a>
+    <?php endif; ?>
+<?php endif; ?>
+
 <!-- anik applying ending here 
      the code works for the tips in the admin and menu dashboard -->
      

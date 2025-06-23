@@ -1,20 +1,61 @@
-/* General & Dashboard */
+/**
+ * Theme Name: Astra Child
+ * Template:   astra
+ * Text Domain: astra-child
+ * ...other header fields
+ */
+
+ /* General & Dashboard */
 *{
   font-family: 'Red Hat Display', sans-serif !important;
 }
 body {
     overflow-x: hidden;
+    color: white;
+}
+h1, .entry-content h1, h2, .entry-content h2, h3, .entry-content h3, h4, .entry-content h4, h5, .entry-content h5, h6, .entry-content h6 {
+    color: #ffffff;
+}
+p{
+    color: #ffffff;
+}
+.container-fluids{
+    background-color: #1A1A1A;
+}
+label{
+    color: #ffffff;
+}
+th, td {
+    color: white;
+}
+
+.jahbulonn-dashboard-content{
+  margin-left: 22%;
+}
+@media (max-width: 767px) {
+    .jahbulonn-dashboard-content {
+        margin-left: 0;
+    }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+    .jahbulonn-dashboard-content {
+      width: 100%;
+        margin-left: 33%;
+    }
 }
 #jahbulonn-dashboard .sidebar {
     min-height: 1300px;
-    background-color: white;
-    color: black;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     border-right: 1px solid #fff;
     padding: 20px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
 }
 #jahbulonn-dashboard .sidebar a {
-    color: black;
+    color: rgb(255, 255, 255);
     text-decoration: none;
     display: block;
     padding: 10px 20px;
@@ -23,7 +64,7 @@ body {
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
 #jahbulonn-dashboard .sidebar a:hover {
-    background-color: #019EBE;
+    background-color: #FF0F50;
     color: white;
 }
 #jahbulonn-dashboard .offcanvas-end {
@@ -55,6 +96,10 @@ img.jahbulonn-logo {
 }
 
 /* My Application */
+
+.card-body.text-center{
+  background-color: black;
+}
 
 .jahbulonn-application-container {
     width: 100%;
@@ -199,7 +244,7 @@ img.jahbulonn-logo {
 
   .jahbulonn-pdf-list a {
     text-decoration: none;
-    color: #019EBE;
+    color: #0792e3;
   }
 
   .jahbulonn-pdf-list a:hover {
@@ -216,7 +261,7 @@ img.jahbulonn-logo {
   .jahbulonn-profile-container {
     max-width: 80%;
     margin: 0;
-    background: #fff;
+    background: #000000;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(147, 76, 176, 0.15);
     overflow: hidden;
@@ -225,7 +270,7 @@ img.jahbulonn-logo {
 
   .jahbulonn-profile-header {
     padding: 25px 30px;
-    background: #5c291c;
+    background: #FF0F50;
     color: white;
     text-align: center;
     font-weight: 700;
@@ -238,6 +283,8 @@ img.jahbulonn-logo {
 
   .jahbulonn-profile-content {
     padding: 30px 40px 20px 40px;
+    border-radius: 0 0 12px 12px;
+    background-color: #66666641;
   }
 
   .jahbulonn-profile-picture-container {
@@ -250,7 +297,7 @@ img.jahbulonn-logo {
     width: 160px;
     height: 160px;
     border-radius: 50%;
-    border: 4px solid #019EBE;
+    border: 4px solid #0792e3;
     object-fit: cover;
     box-shadow: 0 0 15px rgba(147, 76, 176, 0.3);
   }
@@ -271,7 +318,7 @@ img.jahbulonn-logo {
     display: block;
     margin-bottom: 10px;
     font-weight: 600;
-    color: #019EBE;
+    color: #ffffff;
   }
 
   .jahbulonn-profile-input {
@@ -285,7 +332,7 @@ img.jahbulonn-logo {
   }
 
   .jahbulonn-profile-input:focus {
-    border-color: #019EBE;
+    border-color: #0792e3;
     outline: none;
     box-shadow: 0 0 6px rgba(147, 76, 176, 0.5);
   }
@@ -295,14 +342,20 @@ img.jahbulonn-logo {
     gap: 15px;
     align-items: center;
     margin-bottom: 18px;
+    /* border: 2px solid green; */
   }
 
-  .jahbulonn-profile-form-input {
+  .jahbulonn-profile-form-row #tip_id,#match ,#tip_type , #odds ,#date ,#stake ,#result , #return_amt , #profit ,#tip_result ,#month{
+    background-color: rgba(0, 0, 0, 0.199) !important;
+    border: 2px solid rgba(255, 72, 72, 0.582) !important;
+    outline: 2px solid rgba(255, 99, 99, 0.253) !important;
+    color: #fff;
+    padding: 12px !important;
     flex-grow: 1;
   }
 
   .jahbulonn-profile-button {
-    background-color: #019EBE;
+    background-color: #FF0F50;
     color: white;
     border: none;
     padding: 12px 22px;
@@ -315,8 +368,9 @@ img.jahbulonn-logo {
   }
 
   .jahbulonn-profile-button:hover {
-    background-color: #019EBE;
-    box-shadow: 0 5px 15px rgba(122, 59, 163, 0.6);
+    background-color: #be3056;
+    color: white;
+    /* box-shadow: 0 5px 15px rgba(122, 59, 163, 0.6); */
   }
 
   .jahbulonn-profile-message {
@@ -340,6 +394,6 @@ img.jahbulonn-logo {
  }
 
  #jahbulonn-dashboard .jahbulonn-menu-item.active {
-    background-color: #fc1100 !important;
-    color: rgb(0, 0, 0) !important;
+    background-color: #FF0F50 !important;
+    color: #ffffff !important;
  }

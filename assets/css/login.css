@@ -276,7 +276,7 @@ h6 {
 .login-page .login-form .input-control .label-container a,
 .login-page .signup-form .input-control .label-container a,
 .login-page .forgot-form .input-control .label-container a {
-  color: #0792e3;
+  color: #ffffff;
   font-weight: 600;
 }
 .login-page .login-form .input-control .label-container:hover input ~ .checkmark,
@@ -330,7 +330,7 @@ h6 {
 .login-page .login-form .input-control .label-container input:checked ~ .checkmark,
 .login-page .signup-form .input-control .label-container input:checked ~ .checkmark,
 .login-page .forgot-form .input-control .label-container input:checked ~ .checkmark {
-  background-color: #0792e3;
+  background-color: #FF0F50;
 }
 .login-page .login-form .input-control .label-container input:checked ~ .checkmark:after,
 .login-page .signup-form .input-control .label-container input:checked ~ .checkmark:after,
