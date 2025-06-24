@@ -10,7 +10,7 @@ include "header-user-dashboard.php";
 ?>
 <main class="jahbulonn-main" id="jahbulonn-dashboard">
     <?php require "dashboard-mobile-navbar.php"; ?>
-    <div class="container-fluid">
+    <div class="container-fluids">
         <div class="row">
             <div class="col-md-3 col-lg-2 d-none d-md-block sidebar">
                 <?php include "menu-items.php"; ?>
