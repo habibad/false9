@@ -83,7 +83,7 @@ function load_ai_tips_callback() {
             $flag = "🇳🇱"; // Static for now; optional to make dynamic later
             echo '
             <div class="col-md-4 mb-4">
-                <div class="card shadow-sm border-0">
+                <div class="card shadow-sm border-0 tips-card-container">
                     <div class="card-header bg-warning text-dark font-weight-bold text-center">
                         ' . strtoupper($user_level) . ' TIP
                     </div>
@@ -107,7 +107,154 @@ function load_ai_tips_callback() {
 }
 
 
+//echo get_template_directory_uri() . '/js/profile-dashboard-ajax.js';
+//all update ajax code for the users dashboard
+// Enqueue AJAX script for profile dashboard
+// function enqueue_profile_dashboard_ajax() {
+//     wp_enqueue_script('profile-dashboard-ajax', get_template_directory_uri() . '/js/profile-dashboard-ajax.js', array('jquery'), null, true);
+    
+//     // Localize script to add ajax_url and nonce
+//     wp_localize_script('profile-dashboard-ajax', 'ajax_obj', array(
+//         'ajax_url' => admin_url('admin-ajax.php'),
+//         'nonce' => wp_create_nonce('profile_dashboard_nonce') // Nonce for security
+//     ));
+// }
+// add_action('wp_enqueue_scripts', 'enqueue_profile_dashboard_ajax');
 
+// In functions.php
+function enqueue_profile_dashboard_ajax() {
+    if (is_page_template('user-dashboard/dashboard.php')) {
+        wp_enqueue_script(
+    'profile-dashboard-ajax',
+    get_stylesheet_directory_uri() . '/js/profile-dashboard-ajax.js',
+    array('jquery'),
+    null,
+    true
+);
+
+
+        wp_localize_script('profile-dashboard-ajax', 'ajax_obj', array(
+            'ajax_url' => admin_url('admin-ajax.php'),
+            'nonce'    => wp_create_nonce('profile_dashboard_nonce'),
+        ));
+    }
+}
+add_action('wp_enqueue_scripts', 'enqueue_profile_dashboard_ajax');
+
+
+
+// Change display name
+add_action('wp_ajax_update_display_name', function () {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'profile_dashboard_nonce')) {
+        wp_send_json_error(['message' => 'Security check failed.']);
+    }
+
+    $user_id = get_current_user_id();
+    $new_name = sanitize_text_field($_POST['display_name']);
+
+    if (strlen($new_name) < 3) {
+        wp_send_json_error(['message' => 'Name too short.']);
+    }
+
+    wp_update_user([
+        'ID' => $user_id,
+        'display_name' => $new_name,
+        'nickname' => $new_name,
+    ]);
+
+    wp_send_json_success();
+});
+
+// Change password
+add_action('wp_ajax_update_password', function () {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'profile_dashboard_nonce')) {
+        wp_send_json_error(['message' => 'Security check failed.']);
+    }
+
+    $user_id = get_current_user_id();
+    $new_password = sanitize_text_field($_POST['password']);
+
+    if (strlen($new_password) < 6) {
+        wp_send_json_error(['message' => 'Password too short.']);
+    }
+
+    wp_set_password($new_password, $user_id);
+    wp_send_json_success();
+});
+
+
+// Update Profile Picture
+function update_profile_picture() {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'profile_dashboard_nonce')) {
+        echo json_encode(array('success' => false, 'message' => 'Security check failed.'));
+        wp_die();
+    }
+
+    if (isset($_FILES['profile_picture']) && !empty($_FILES['profile_picture']['name'])) {
+        $uploaded_file = $_FILES['profile_picture'];
+        $upload_dir = wp_upload_dir();
+
+        // Check if the file is an image
+        $file_type = wp_check_filetype($uploaded_file['name']);
+        if (in_array($file_type['type'], ['image/jpeg', 'image/png', 'image/gif'])) {
+            $file_path = $upload_dir['path'] . '/' . basename($uploaded_file['name']);
+            if (move_uploaded_file($uploaded_file['tmp_name'], $file_path)) {
+                $file_url = $upload_dir['url'] . '/' . basename($uploaded_file['name']);
+                update_user_meta(get_current_user_id(), 'profile_picture', $file_url);
+                echo json_encode(array('success' => true, 'file_url' => $file_url));
+            } else {
+                echo json_encode(array('success' => false, 'message' => 'There was an error uploading your file.'));
+            }
+        } else {
+            echo json_encode(array('success' => false, 'message' => 'Please upload a valid image file (JPEG, PNG, or GIF).'));
+        }
+    } else {
+        echo json_encode(array('success' => false, 'message' => 'No file uploaded.'));
+    }
+
+    wp_die();
+}
+add_action('wp_ajax_update_profile_picture', 'update_profile_picture');
+
+// Update Display Name
+function update_display_name() {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'profile_dashboard_nonce')) {
+        echo json_encode(array('success' => false, 'message' => 'Security check failed.'));
+        wp_die();
+    }
+
+    if (isset($_POST['display_name']) && !empty($_POST['display_name'])) {
+        $new_display_name = sanitize_text_field($_POST['display_name']);
+        wp_update_user(array('ID' => get_current_user_id(), 'display_name' => $new_display_name));
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('success' => false, 'message' => 'Display name cannot be empty.'));
+    }
+
+    wp_die();
+}
+add_action('wp_ajax_update_display_name', 'update_display_name');
+
+// Update Password
+function update_password() {
+    if (!isset($_POST['nonce']) || !wp_verify_nonce($_POST['nonce'], 'profile_dashboard_nonce')) {
+        echo json_encode(array('success' => false, 'message' => 'Security check failed.'));
+        wp_die();
+    }
+
+    if (isset($_POST['password']) && !empty($_POST['password'])) {
+        $new_password = sanitize_text_field($_POST['password']);
+        wp_set_password($new_password, get_current_user_id());
+        echo json_encode(array('success' => true));
+    } else {
+        echo json_encode(array('success' => false, 'message' => 'Password cannot be empty.'));
+    }
+
+    wp_die();
+}
+add_action('wp_ajax_update_password', 'update_password');
+
+//all update ajax code for the users dashboard end
 
 // Enqueue assets for the user dashboard
 function enqueue_user_dashboard_assets() {

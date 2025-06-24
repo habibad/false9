@@ -43,6 +43,16 @@ th, td {
         margin-left: 33%;
     }
 }
+#jahbulonn-dashboard {
+    min-height: 100vh;
+}
+.jahbulonn-menu-items-style{
+    padding-top: 50px;
+}
+.table-hover>tbody>tr:hover>* {
+    --bs-table-accent-bg: var(--bs-table-hover-bg);
+    color: #FF0F50;
+}
 #jahbulonn-dashboard .sidebar {
     min-height: 1300px;
     background-color: rgb(0, 0, 0);
@@ -96,10 +106,14 @@ img.jahbulonn-logo {
 }
 
 /* My Application */
+#tips-container{
+  margin-top: 55px;
+}
 
 .card-body.text-center{
-  background-color: black;
+  background-color: #1c1c1c;
 }
+
 
 .jahbulonn-application-container {
     width: 100%;

@@ -1,7 +1,7 @@
 <div class="menu-items ">
     <img src="<?php echo get_stylesheet_directory_uri(); ?>/user-dashboard/false-icon.png" alt="logo"
         class="rounded jahbulonn-logo">
-
+<div class="jahbulonn-menu-items-style">
     <?php if (is_page('my-dashboard')): ?>
     <a href="<?php echo home_url(); ?>/my-dashboard" class="jahbulonn-menu-item active">Dashboard</a>
     <?php else: ?>
@@ -50,4 +50,5 @@
      the code works for the tips in the admin and menu dashboard -->
      
     <a href="<?php echo wp_logout_url(); ?>" class="jahbulonn-menu-item">Logout</a>
+    </div>
 </div>

@@ -43,15 +43,31 @@ foreach ($membership_levels as $level) {
 
                         <div class="jahbulonn-profile-content">
                             <div class="jahbulonn-profile-form-row">
-                                <input type="date" id="tip-date" class="jahbulonn-profile-input" value="<?php echo date('Y-m-d'); ?>" />
+                                <!-- <input type="date" id="tip-date" class="jahbulonn-profile-input" value="<?php echo date('Y-m-d'); ?>" /> -->
+                                <div class="custom-calendar-wrapper">
+                                    <div class="calendar-header">
+                                        <button id="prev-month">&lt;</button>
+                                        <span id="calendar-month"></span>
+                                        <button id="next-month">&gt;</button>
+                                    </div>
+                                    <table id="calendar">
+                                        <!-- Calendar will be dynamically generated here -->
+                                    </table>
+                                    <button id="reset-dates" class="btn btn-sm btn-outline-light mt-2">Reset
+                                        Dates</button>
+                                </div>
+
+                                <input type="hidden" id="tip-date" value="<?php echo date('Y-m-d'); ?>" />
+
                             </div>
                         </div>
                     </div>
 
                     <!-- Tip Cards Section -->
-                    <div class="jahbulonn-profile-container mt-4">
-                        <div class="jahbulonn-profile-header">
-                            <h2 class="text-white">Tips for <span id="selected-date"><?php echo date('jS F Y'); ?></span></h2>
+                    <div class="mt-4">
+                        <div>
+                            <h2 class="text-white">Tips for <span
+                                    id="selected-date"><?php echo date('jS F Y'); ?></span></h2>
                         </div>
                         <div id="tips-container" class="row">
                             <!-- Tips will be loaded here via AJAX -->
@@ -68,6 +84,99 @@ foreach ($membership_levels as $level) {
 
 <script>
 jQuery(document).ready(function($) {
+    const today = new Date();
+    let currentMonth = today.getMonth();
+    let currentYear = today.getFullYear();
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
+
+    function generateCalendar(month, year) {
+        $('#calendar-month').text(monthNames[month] + ' ' + year);
+
+        let firstDay = (new Date(year, month)).getDay();
+        let daysInMonth = 32 - new Date(year, month, 32).getDate();
+
+        let tbl = $('#calendar');
+        tbl.html('');
+
+        let weekdays = '<tr><th>Mo</th><th>Tu</th><th>We</th><th>Th</th><th>Fr</th><th>Sa</th><th>Su</th></tr>';
+        tbl.append(weekdays);
+
+        let date = 1;
+        for (let i = 0; i < 6; i++) {
+            let row = $('<tr></tr>');
+
+            for (let j = 1; j <= 7; j++) {
+                if (i === 0 && j < (firstDay === 0 ? 7 : firstDay)) {
+                    row.append('<td></td>');
+                } else if (date > daysInMonth) {
+                    break;
+                } else {
+                    let cell = $('<td></td>').text(date).addClass('calendar-date');
+
+                    // Highlight today's date
+                    if (date === today.getDate() && year === today.getFullYear() && month === today
+                    .getMonth()) {
+                        cell.addClass('active-date');
+                    }
+
+                    // Capture the correct date for each cell using closure
+                    (function(selectedDay) {
+                        cell.on('click', function() {
+                            $('.calendar-date').removeClass('active-date');
+                            $(this).addClass('active-date');
+
+                            let selectedDate = new Date(year, month, selectedDay);
+
+                            // Build date in YYYY-MM-DD without timezone issue
+                            let yyyy = selectedDate.getFullYear();
+                            let mm = String(selectedDate.getMonth() + 1).padStart(2, '0');
+                            let dd = String(selectedDate.getDate()).padStart(2, '0');
+                            let formattedDate = `${yyyy}-${mm}-${dd}`;
+
+                            $('#tip-date').val(formattedDate).trigger('change');
+                        });
+                    })(date); // passing the current date correctly
+
+                    row.append(cell);
+                    date++;
+                }
+            }
+
+            tbl.append(row);
+        }
+    }
+
+    $('#prev-month').on('click', function() {
+        currentMonth--;
+        if (currentMonth < 0) {
+            currentMonth = 11;
+            currentYear--;
+        }
+        generateCalendar(currentMonth, currentYear);
+    });
+
+    $('#next-month').on('click', function() {
+        currentMonth++;
+        if (currentMonth > 11) {
+            currentMonth = 0;
+            currentYear++;
+        }
+        generateCalendar(currentMonth, currentYear);
+    });
+
+    $('#reset-dates').on('click', function() {
+        currentMonth = today.getMonth();
+        currentYear = today.getFullYear();
+        generateCalendar(currentMonth, currentYear);
+        $('#tip-date').val('<?php echo date('Y-m-d'); ?>').trigger('change');
+    });
+
+    generateCalendar(currentMonth, currentYear);
+
+    // Existing AJAX loader
     function loadTips(date) {
         $.ajax({
             url: '<?php echo admin_url('admin-ajax.php'); ?>',
@@ -77,12 +186,15 @@ jQuery(document).ready(function($) {
                 date: date
             },
             beforeSend: function() {
-                $('#tips-container').html('<div class="col-12 text-center p-5 text-white">Loading tips...</div>');
+                $('#tips-container').html(
+                    '<div class="col-12 text-center p-5 text-white">Loading tips...</div>');
             },
             success: function(response) {
                 $('#tips-container').html(response);
                 const formatted = new Date(date).toLocaleDateString('en-US', {
-                    year: 'numeric', month: 'long', day: 'numeric'
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
                 });
                 $('#selected-date').text(formatted);
             }
@@ -93,14 +205,62 @@ jQuery(document).ready(function($) {
         loadTips($(this).val());
     });
 
-    loadTips($('#tip-date').val()); // initial load
+    loadTips($('#tip-date').val());
 });
 </script>
+
 
 <?php include "footer-user-dashboard.php"; ?>
 
 <style>
-#jahbulonn-dashboard {
-    background-color: rgb(26, 26, 26);
+.custom-calendar-wrapper {
+    background: black;
+    border-radius: 8px;
+    padding: 16px;
+    max-width: 450px;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.calendar-header button {
+    background: #00c3ad;
+    border: none;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+#calendar {
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+#calendar td {
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+#calendar td:hover {
+    background-color: #e0f7f5;
+}
+
+.active-date {
+    background-color: #00c3ad;
+    color: white;
+}
+
+#reset-dates {
+    background: none;
+    border: none;
+    color: #00c3ad;
+    cursor: pointer;
 }
 </style>
