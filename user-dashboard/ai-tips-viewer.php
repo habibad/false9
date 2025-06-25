@@ -19,7 +19,7 @@ foreach ($membership_levels as $level) {
 }
 ?>
 <main class="jahbulonn-main bg-black" id="jahbulonn-dashboard">
-
+    <div class="userAvatar"></div>
     <?php require "dashboard-mobile-navbar.php"; ?>
 
     <div class="container-fluid">
@@ -30,7 +30,7 @@ foreach ($membership_levels as $level) {
             </div>
 
             <!-- Main Content -->
-            <div class="col-md-9 col-lg-10 col-12 p-4">
+            <div class="col-md-9 col-lg-10 col-12 p-1 p-md-4">
                 <div class="jahbulonn-dashboard-content">
 
                     <h1 class="text-white">AI Tips Viewer (<?php echo ucfirst($user_level); ?> Member)</h1>
@@ -44,35 +44,49 @@ foreach ($membership_levels as $level) {
                         <div class="jahbulonn-profile-content">
                             <div class="jahbulonn-profile-form-row">
                                 <!-- <input type="date" id="tip-date" class="jahbulonn-profile-input" value="<?php echo date('Y-m-d'); ?>" /> -->
-                                <div class="custom-calendar-wrapper">
-                                    <div class="calendar-header">
-                                        <button id="prev-month">&lt;</button>
-                                        <span id="calendar-month"></span>
-                                        <button id="next-month">&gt;</button>
+                                <div class="rows111">
+
+                                    <div class="cols">
+                                        <div class="custom-calendar-wrapper">
+                                            <div class="calendar-header">
+                                                <button id="prev-month">&lt;</button>
+                                                <span id="calendar-month"></span>
+                                                <button id="next-month">&gt;</button>
+                                            </div>
+                                            <table id="calendar">
+                                                <!-- Calendar will be dynamically generated here -->
+                                            </table>
+                                            <button id="reset-dates" class="btn btn-sm btn-outline-light mt-2">Reset
+                                                Dates</button>
+                                            <input type="hidden" id="tip-date" value="<?php echo date('Y-m-d'); ?>" />
+                                        </div>
                                     </div>
-                                    <table id="calendar">
-                                        <!-- Calendar will be dynamically generated here -->
-                                    </table>
-                                    <button id="reset-dates" class="btn btn-sm btn-outline-light mt-2">Reset
-                                        Dates</button>
+
+                                    <div class="cols">
+                                        <!-- Tip Cards Section -->
+                                        <div class="mt-4">
+                                            <div>
+                                                <h2 class="text-white">Tips for <span
+                                                        id="selected-date"><?php echo date('jS F Y'); ?></span></h2>
+                                            </div>
+
+                                            <div id="tips-container" class="">
+                                                <!-- Tips will be loaded here via AJAX -->
+                                            </div>
+
+                                        </div>
+                                    </div>
+
                                 </div>
 
-                                <input type="hidden" id="tip-date" value="<?php echo date('Y-m-d'); ?>" />
+
+
 
                             </div>
                         </div>
                     </div>
 
-                    <!-- Tip Cards Section -->
-                    <div class="mt-4">
-                        <div>
-                            <h2 class="text-white">Tips for <span
-                                    id="selected-date"><?php echo date('jS F Y'); ?></span></h2>
-                        </div>
-                        <div id="tips-container" class="row">
-                            <!-- Tips will be loaded here via AJAX -->
-                        </div>
-                    </div>
+
 
                 </div>
             </div>
@@ -118,7 +132,7 @@ jQuery(document).ready(function($) {
 
                     // Highlight today's date
                     if (date === today.getDate() && year === today.getFullYear() && month === today
-                    .getMonth()) {
+                        .getMonth()) {
                         cell.addClass('active-date');
                     }
 
@@ -214,10 +228,13 @@ jQuery(document).ready(function($) {
 
 <style>
 .custom-calendar-wrapper {
-    background: black;
+
     border-radius: 8px;
     padding: 16px;
-    max-width: 450px;
+    width: 100%;
+    min-width: 450px;
+    max-width: 500px;
+    background-color: rgba(252, 110, 148, 0.1);
 }
 
 .calendar-header {
@@ -227,8 +244,14 @@ jQuery(document).ready(function($) {
     margin-bottom: 10px;
 }
 
+#calendar-month {
+    color: white;
+    font-style: bold;
+    font-size: 24px;
+}
+
 .calendar-header button {
-    background: #00c3ad;
+    background: #FF0F50;
     border: none;
     color: white;
     padding: 5px 10px;
@@ -240,27 +263,103 @@ jQuery(document).ready(function($) {
     width: 100%;
     text-align: center;
     border-collapse: collapse;
+    border: 1px solid transparent;
 }
 
 #calendar td {
-    padding: 10px;
+    padding: 18px 6px;
     cursor: pointer;
     border-radius: 4px;
+    border: 2px solid rgba(255, 184, 203, 0.11);
 }
 
 #calendar td:hover {
-    background-color: #e0f7f5;
+    background-color: rgb(255, 184, 203);
 }
 
 .active-date {
-    background-color: #00c3ad;
+    background-color: #FF0F50;
     color: white;
 }
 
 #reset-dates {
     background: none;
     border: none;
-    color: #00c3ad;
+    color: rgb(255, 255, 255);
     cursor: pointer;
+}
+
+/* ====tips card=== */
+.rows111 {
+    width: 100%;
+    display: flex;
+    gap: 30px;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card-header {
+    background-color: rgb(202, 4, 64);
+    color: white;
+}
+
+.tipsCard-body {
+    background-color: #312226;
+    color: white;
+    padding: 10px
+}
+
+.userAvatar {
+    width: 100px;
+    height: 30px;
+    border-radius: 5%;
+    background-color: rgb(202, 4, 64);
+    position: fixed;
+    top: 35px;
+    right: 5px;
+}
+
+@media screen and (max-width:576px) {
+    .jahbulonn-profile-content {
+        padding:10px 0px;
+        border-radius: 0 0 12px 12px;
+        background-color: #66666641;
+    }
+
+    .custom-calendar-wrapper {
+        border-radius: 8px;
+        padding: 0px;
+        width: 100%;
+        min-width: 100%;
+        max-width: 100%;
+        background-color: rgba(252, 110, 148, 0.1);
+    }
+
+    #calendar {
+        width: 100%;
+        max-width: 100%;
+        padding:5px;
+        text-align: center;
+        border-collapse: collapse;
+        border: 1px solid transparent;
+    }
+
+    #calendar th {
+        padding: 1px 1px;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 184, 203, 0.11);
+    }
+
+    #calendar td ,th{
+        padding: 1px 1px;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid rgba(255, 184, 203, 0.11);
+    }
+
+    .rows111 {
+        flex-direction: column;
+    }
 }
 </style>

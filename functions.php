@@ -82,12 +82,12 @@ function load_ai_tips_callback() {
         foreach ($tips as $tip) {
             $flag = "🇳🇱"; // Static for now; optional to make dynamic later
             echo '
-            <div class="col-md-4 mb-4">
+            <div class="col-12 mb-4">
                 <div class="card shadow-sm border-0 tips-card-container">
-                    <div class="card-header bg-warning text-dark font-weight-bold text-center">
+                    <div class="card-header">
                         ' . strtoupper($user_level) . ' TIP
                     </div>
-                    <div class="card-body text-center">
+                    <div class="tipsCard-body">
                         <h5 class="card-title">'. esc_html($tip->match) .'</h5>
                         <p class="mb-1 text-muted">'. $flag .' '. date("jS F Y · H:i", strtotime($tip->date)) .'</p>
                         <p class="mb-2"><strong>AI Tip:</strong> '. esc_html($tip->tip_type) .'</p>
