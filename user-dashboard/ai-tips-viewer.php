@@ -18,8 +18,12 @@ foreach ($membership_levels as $level) {
     }
 }
 ?>
+<?php require "dashboard-avatar.php"; ?>
 <main class="jahbulonn-main bg-black" id="jahbulonn-dashboard">
-    <div class="userAvatar"></div>
+    
+    
+
+
     <?php require "dashboard-mobile-navbar.php"; ?>
 
     <div class="container-fluid">
@@ -34,7 +38,7 @@ foreach ($membership_levels as $level) {
                 <div class="jahbulonn-dashboard-content">
 
                     <h1 class="text-white">AI Tips Viewer (<?php echo ucfirst($user_level); ?> Member)</h1>
-                    <p class="text-muted">Browse your available AI tips by selecting a date below.</p>
+                    <!-- <p class="text-muted">Browse your available AI tips by selecting a date below.</p> -->
 
                     <div class="jahbulonn-profile-container">
                         <div class="jahbulonn-profile-header">
@@ -309,19 +313,12 @@ jQuery(document).ready(function($) {
     padding: 10px
 }
 
-.userAvatar {
-    width: 100px;
-    height: 30px;
-    border-radius: 5%;
-    background-color: rgb(202, 4, 64);
-    position: fixed;
-    top: 35px;
-    right: 5px;
-}
+
+
 
 @media screen and (max-width:576px) {
     .jahbulonn-profile-content {
-        padding:10px 0px;
+        padding: 10px 0px;
         border-radius: 0 0 12px 12px;
         background-color: #66666641;
     }
@@ -338,7 +335,7 @@ jQuery(document).ready(function($) {
     #calendar {
         width: 100%;
         max-width: 100%;
-        padding:5px;
+        padding: 5px;
         text-align: center;
         border-collapse: collapse;
         border: 1px solid transparent;
@@ -351,7 +348,8 @@ jQuery(document).ready(function($) {
         border: 1px solid rgba(255, 184, 203, 0.11);
     }
 
-    #calendar td ,th{
+    #calendar td,
+    th {
         padding: 1px 1px;
         cursor: pointer;
         border-radius: 4px;

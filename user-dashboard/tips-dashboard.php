@@ -8,6 +8,7 @@ if (!is_user_logged_in()) {
 }
 include "header-user-dashboard.php";
 ?>
+<?php require "dashboard-avatar.php"; ?>
 <main class="jahbulonn-main" id="jahbulonn-dashboard">
     <?php require "dashboard-mobile-navbar.php"; ?>
     <div class="container-fluids">

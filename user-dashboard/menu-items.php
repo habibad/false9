@@ -36,7 +36,7 @@
 
      <!-- anik applying start from here 
      the code works for the tips in the admin and menu dashboard -->
-<?php if ( current_user_can('administrator') ) : ?>
+<?php if ( is_user_logged_in() ) : ?>
     <?php if ( is_page('statistics') ) : ?>
         <a href="<?php echo home_url(); ?>/statistics" class="jahbulonn-menu-item active">statistics</a>
     <?php else: ?>

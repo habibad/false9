@@ -11,8 +11,11 @@
 }
 body {
     overflow-x: hidden;
-    color: white;
+    background-color: #0f0f0f;
+    color: #f1f1f1;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
+
 h1, .entry-content h1, h2, .entry-content h2, h3, .entry-content h3, h4, .entry-content h4, h5, .entry-content h5, h6, .entry-content h6 {
     color: #ffffff;
 }
@@ -31,6 +34,9 @@ th, td {
 
 .jahbulonn-dashboard-content{
   margin-left: 22%;
+}
+h1.text-white {
+    padding-bottom: 40px;
 }
 @media (max-width: 767px) {
     .jahbulonn-dashboard-content {
@@ -55,25 +61,27 @@ th, td {
 }
 #jahbulonn-dashboard .sidebar {
     min-height: 1300px;
-    background-color: rgb(0, 0, 0);
+    background-color: #1a1a1a;
     color: rgb(255, 255, 255);
     border-right: 1px solid #fff;
     padding: 20px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     position: fixed;
+    padding-top: 30px;
     top: 0;
     left: 0;
 }
 #jahbulonn-dashboard .sidebar a {
-    color: rgb(255, 255, 255);
+     color: #f1f1f1;
     text-decoration: none;
     display: block;
-    padding: 10px 20px;
-    border-radius: 8px;
-    margin-bottom: 10px;
+    padding: 12px 20px;
+    border-radius: 6px;
+    margin-bottom: 8px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 }
-#jahbulonn-dashboard .sidebar a:hover {
+#jahbulonn-dashboard .sidebar a:hover,
+#jahbulonn-dashboard .sidebar a.active {
     background-color: #FF0F50;
     color: white;
 }
@@ -275,11 +283,12 @@ img.jahbulonn-logo {
   .jahbulonn-profile-container {
     max-width: 80%;
     margin: 0;
-    background: #000000;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(147, 76, 176, 0.15);
+    background-color: #1e1e2f;
+    border-radius: 10px;
+    box-shadow: 0 0 25px rgba(255, 15, 80, 0.2);
     overflow: hidden;
     padding-bottom: 30px;
+    padding-top: 30px;
   }
 
   .jahbulonn-profile-header {
@@ -293,12 +302,19 @@ img.jahbulonn-logo {
   }
   .jahbulonn-profile-header h1 {
     color: white;
-  }
+    font-size: 28px;
+    margin-bottom: 30px;
+}
 
   .jahbulonn-profile-content {
     padding: 30px 40px 20px 40px;
-    border-radius: 0 0 12px 12px;
+    /* border-radius: 0 0 12px 12px; */
     background-color: #66666641;
+  }
+  @media (max-width: 767px) {
+    .jahbulonn-profile-content {
+        padding: 0px 0px 0px 0px;
+    }
   }
 
   .jahbulonn-profile-picture-container {
@@ -308,19 +324,19 @@ img.jahbulonn-logo {
   }
 
   .jahbulonn-profile-picture {
-    width: 160px;
-    height: 160px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    border: 4px solid #0792e3;
+    border: 3px solid #ff0f50;
     object-fit: cover;
-    box-shadow: 0 0 15px rgba(147, 76, 176, 0.3);
+    box-shadow: 0 0 10px rgba(255, 15, 80, 0.5);
   }
 
   .jahbulonn-profile-info {
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 600;
-    margin-bottom: 18px;
-    color: #4a4a4a;
+    margin: 28px 0;
+    color: #ccc;
     text-align: center;
   }
 
@@ -336,23 +352,26 @@ img.jahbulonn-logo {
   }
 
   .jahbulonn-profile-input {
+    flex: 1;
     width: 100%;
-    padding: 12px 15px;
-    border: 1.8px solid #c9bde0;
-    border-radius: 8px;
-    font-size: 15px;
-    color: #4a4a4a;
-    transition: border-color 0.3s ease;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f8f9fa;
+    /* font-size: 15px; */
+    color: #333;
+    transition: border 0.3s ease;
   }
 
   .jahbulonn-profile-input:focus {
-    border-color: #0792e3;
+    border-color: #ff0f50;
     outline: none;
-    box-shadow: 0 0 6px rgba(147, 76, 176, 0.5);
+    /* box-shadow: 0 0 6px rgba(147, 76, 176, 0.5); */
   }
 
   .jahbulonn-profile-form-row {
     display: flex;
+    flex-direction: row;
     gap: 15px;
     align-items: center;
     margin-bottom: 18px;
@@ -372,17 +391,17 @@ img.jahbulonn-logo {
     background-color: #FF0F50;
     color: white;
     border: none;
-    padding: 12px 22px;
-    border-radius: 8px;
-    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 6px;
     font-size: 15px;
     font-weight: 600;
     transition: background-color 0.3s ease;
-    box-shadow: 0 3px 8px rgba(147, 76, 176, 0.4);
+    /* box-shadow: 0 3px 8px rgba(147, 76, 176, 0.4); */
+    cursor: pointer;
   }
 
   .jahbulonn-profile-button:hover {
-    background-color: #be3056;
+    background-color: #e00f45;
     color: white;
     /* box-shadow: 0 5px 15px rgba(122, 59, 163, 0.6); */
   }
@@ -405,6 +424,14 @@ img.jahbulonn-logo {
     .jahbulonn-profile-container{
         max-width: 100%;
     }
+    .jahbulonn-profile-form-row {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 18px;
+  }
+  
  }
 
  #jahbulonn-dashboard .jahbulonn-menu-item.active {
