@@ -6,6 +6,7 @@ if (!is_user_logged_in()) {
     wp_redirect(home_url());
     exit;
 }
+
 include "header-user-dashboard.php";
 
 $current_user = wp_get_current_user();
@@ -17,13 +18,14 @@ foreach ($membership_levels as $level) {
         $user_level = $level;
     }
 }
+
+// Get the current user's subscription details
+$user_subscription = get_user_subscription($current_user->ID);
 ?>
+
 <?php require "dashboard-avatar.php"; ?>
+
 <main class="jahbulonn-main bg-black" id="jahbulonn-dashboard">
-    
-    
-
-
     <?php require "dashboard-mobile-navbar.php"; ?>
 
     <div class="container-fluid">
@@ -36,9 +38,7 @@ foreach ($membership_levels as $level) {
             <!-- Main Content -->
             <div class="col-md-9 col-lg-10 col-12 p-1 p-md-4">
                 <div class="jahbulonn-dashboard-content">
-
                     <h1 class="text-white">AI Tips Viewer (<?php echo ucfirst($user_level); ?> Member)</h1>
-                    <!-- <p class="text-muted">Browse your available AI tips by selecting a date below.</p> -->
 
                     <div class="jahbulonn-profile-container">
                         <div class="jahbulonn-profile-header">
@@ -47,9 +47,7 @@ foreach ($membership_levels as $level) {
 
                         <div class="jahbulonn-profile-content">
                             <div class="jahbulonn-profile-form-row">
-                                <!-- <input type="date" id="tip-date" class="jahbulonn-profile-input" value="<?php echo date('Y-m-d'); ?>" /> -->
                                 <div class="rows111">
-
                                     <div class="cols">
                                         <div class="custom-calendar-wrapper">
                                             <div class="calendar-header">
@@ -60,8 +58,7 @@ foreach ($membership_levels as $level) {
                                             <table id="calendar">
                                                 <!-- Calendar will be dynamically generated here -->
                                             </table>
-                                            <button id="reset-dates" class="btn btn-sm btn-outline-light mt-2">Reset
-                                                Dates</button>
+                                            <button id="reset-dates" class="btn btn-sm btn-outline-light mt-2">Reset Dates</button>
                                             <input type="hidden" id="tip-date" value="<?php echo date('Y-m-d'); ?>" />
                                         </div>
                                     </div>
@@ -70,28 +67,18 @@ foreach ($membership_levels as $level) {
                                         <!-- Tip Cards Section -->
                                         <div class="mt-4">
                                             <div>
-                                                <h2 class="text-white">Tips for <span
-                                                        id="selected-date"><?php echo date('jS F Y'); ?></span></h2>
+                                                <h2 class="text-white">Tips for <span id="selected-date"><?php echo date('jS F Y'); ?></span></h2>
                                             </div>
 
                                             <div id="tips-container" class="">
                                                 <!-- Tips will be loaded here via AJAX -->
                                             </div>
-
                                         </div>
                                     </div>
-
                                 </div>
-
-
-
-
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
         </div>
@@ -194,7 +181,7 @@ jQuery(document).ready(function($) {
 
     generateCalendar(currentMonth, currentYear);
 
-    // Existing AJAX loader
+    // Existing AJAX loader with subscription validation
     function loadTips(date) {
         $.ajax({
             url: '<?php echo admin_url('admin-ajax.php'); ?>',
@@ -208,7 +195,11 @@ jQuery(document).ready(function($) {
                     '<div class="col-12 text-center p-5 text-white">Loading tips...</div>');
             },
             success: function(response) {
-                $('#tips-container').html(response);
+                if (response.includes('locked')) {
+                    $('#tips-container').html('<div class="col-12 text-center p-5 text-white">You do not have access to view these tips. Please upgrade your membership.</div>');
+                } else {
+                    $('#tips-container').html(response);
+                }
                 const formatted = new Date(date).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
@@ -227,12 +218,10 @@ jQuery(document).ready(function($) {
 });
 </script>
 
-
 <?php include "footer-user-dashboard.php"; ?>
 
 <style>
 .custom-calendar-wrapper {
-
     border-radius: 8px;
     padding: 16px;
     width: 100%;
@@ -293,7 +282,6 @@ jQuery(document).ready(function($) {
     cursor: pointer;
 }
 
-/* ====tips card=== */
 .rows111 {
     width: 100%;
     display: flex;
@@ -310,11 +298,8 @@ jQuery(document).ready(function($) {
 .tipsCard-body {
     background-color: #312226;
     color: white;
-    padding: 10px
+    padding: 10px;
 }
-
-
-
 
 @media screen and (max-width:576px) {
     .jahbulonn-profile-content {

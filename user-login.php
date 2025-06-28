@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['login'])) {
                 <form class="login-form" method="post">
                     <?php wp_nonce_field('user_login_action'); ?>
                     <div class="imgcontainer">
-          <img style="width:300px; height: 100px;" src="<?php echo get_theme_file_uri(); ?>/user-dashboard/false-icon.png" alt="logo" class="avatar">
+          <img style="width:300px; height: 100px;" src="<?php echo get_theme_file_uri(); ?>/user-dashboard/Groupbackground.png" alt="logo" class="avatar">
         </div>
                     <div class="input-control">
                         <div class="row p-l-5 p-r-5">
